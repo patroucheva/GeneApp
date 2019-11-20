@@ -5,22 +5,25 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import model.disorder.cysticfibrosis.CysticFibrosis;
 import model.disorder.hemochromatosis.Hemochromatosis;
 import model.disorder.sicklecellanemia.SickleCellAnemia;
 import model.disorder.taysachs.TaySachs;
+import model.result.RecessiveSingleGeneResult;
+import model.result.Result;
 
 public abstract class RecessiveSingleGeneDisorder extends Disorder {
 	
-	private String disorderName;
 	private String location;
 	private char riskAllele;
 	private String geneName;
 	
-	public String generateResult(Map<String, List<Character>> genome) throws NullPointerException {
+	public void generateResult(Map<String, List<Character>> genome) throws NullPointerException {
 		
 		int riskAlleleFrequency;
 		List<Character> parentAlleles;
 		char riskAllele;
+		Result result = new RecessiveSingleGeneResult();
 		
 		try {
 			
@@ -30,28 +33,28 @@ public abstract class RecessiveSingleGeneDisorder extends Disorder {
 			
 		} catch (NullPointerException e) {
 			
-			return "Note that gene location " + this.getLocation() + " was absent from your DNA text files, so we were unable to check for " + this.getDisorderName() + " at gene " + this.getGeneName() + ".";
+			this.setResult(result);
+			return;
 			
 		}
 
-		
+		result.setAtRisk(false);
+		result.setAbleToCheck(true);
+		((RecessiveSingleGeneResult)result).generateAlleleCombinations(parentAlleles);
 		switch (riskAlleleFrequency) {
 			case 4:
-				return generateMessage(100);
+				result.setAtRisk(true);
 			case 3:
-				return generateMessage(50);
+				result.setAtRisk(true);
 			case 2:
-				if (!(parentAlleles.get(0)== riskAllele && parentAlleles.get(1)== riskAllele) && !(parentAlleles.get(2) == riskAllele && parentAlleles.get(3) == riskAllele)) {
-					return generateMessage(25);
-				} 	
+				if (!(parentAlleles.get(0)== riskAllele && parentAlleles.get(1)== riskAllele) && !(parentAlleles.get(2) == riskAllele && parentAlleles.get(3) == riskAllele))
+					result.setAtRisk(true);
 			default:
-				return "";
+				break;
 		}
-	}
-	
-	public String generateMessage(int percentRisk) {
 		
-		return "Your child may have a " + percentRisk + "% hereditary risk of inheriting " + this.getDisorderName() + ", based on gene " + this.getGeneName() + " at " + this.getLocation() + ".";
+		this.setResult(result);
+		
 	}
 	
 	public static ArrayList<Disorder> getRecessiveSingleGeneDisorders() {
@@ -60,11 +63,8 @@ public abstract class RecessiveSingleGeneDisorder extends Disorder {
 		disorders.addAll(Hemochromatosis.getAllTypes());
 		disorders.addAll(TaySachs.getAllTypes());
 		disorders.addAll(SickleCellAnemia.getAllTypes());
+		disorders.addAll(CysticFibrosis.getAllTypes());
 		return disorders;
-	}
-	
-	public String getDisorderName() {
-		return disorderName;
 	}
 	
 	public String getLocation() {

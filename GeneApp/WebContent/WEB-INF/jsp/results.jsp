@@ -1,41 +1,12 @@
-<!--<html>
-<head>
-<title>Spring MVC Tutorial Series by Crunchify.com</title>
-<style type="text/css">
-body {
-	background-image: url('https://cdn.crunchify.com/bg.png');
-}
-</style>
-</head>
-<body>
-	<br>
-	<div style="text-align: center">
-		<h2>
-			Hey You..!! This is your 1st Spring MCV Tutorial..<br> <br>
-		</h2>
-		<h3>
-			<a href="fileUpload.html">Click here to See Welcome Message... </a>(to
-			check Spring MVC Controller... @RequestMapping("/fileUpload"))
-		</h3>
-	</div>
-</body>
-</html> -->
 <!DOCTYPE HTML>
-<!--
-	Greatness by FreeHTML5.co
-	Twitter: http://twitter.com/fh5co
-	URL: http://FreeHTML5.co
--->
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 	<head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>Geneious &mdash; Heritability DNA Analysis </title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="Free HTML5 Website Template by FreeHTML5.co" />
-	<meta name="keywords" content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
-	<meta name="author" content="FreeHTML5.co" />
 
 
 	<link href='https://fonts.googleapis.com/css?family=Raleway:400,300,600,400italic,700' rel='stylesheet' type='text/css'>
@@ -96,7 +67,26 @@ body {
 					<div class="display-t">
 						<div class="display-tc animate-box" data-animate-effect="fadeIn">
 							<h1>We've Analyzed Your DNA.</h1>
-							<h3>${geneticResults}</h3>
+							<c:forEach var="result" items="${negativeResults}">
+    							<div style="background-color:white;padding:20px;margin-bottom: 20px;">
+    								<div align="left">
+    									<h4 style="color: #ff0000;">${result.disorderName}: ${result.geneName}</h4>
+    									<h4>Location: ${result.location} | Risk Allele: ${result.riskAllele}</h4>
+    									<h4>Possible Outcomes:<c:forEach var="outcome" items="${result.result.alleleCombinations}"> ${outcome}</c:forEach></h4>
+    								</div>
+    							</div>
+    							<br>
+							</c:forEach>
+							<c:forEach var="result" items="${positiveResults}">
+    							<div style="background-color:white;padding:20px;margin-bottom: 20px;">
+    								<div align="left">
+										<h4 style="color: #008000;">${result.disorderName}: ${result.geneName}</h4>
+    									<h4>Location: ${result.location} | Risk Allele: ${result.riskAllele}</h4>
+    									<h4>Possible Outcomes:<c:forEach var="outcome" items="${result.result.alleleCombinations}"> ${outcome}</c:forEach></h4>
+    								</div>
+    							</div>
+    							<br>
+							</c:forEach>
 						</div>
 					</div>
 				</div>

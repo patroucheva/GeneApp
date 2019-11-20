@@ -1,24 +1,23 @@
-package model.disorder.taysachs;
+package model.disorder.cysticfibrosis;
 
 import java.util.ArrayList;
+
 
 import model.disorder.Disorder;
 import model.disorder.RecessiveSingleGeneDisorder;
 
-public class TaySachs extends RecessiveSingleGeneDisorder {
+public class CysticFibrosis extends RecessiveSingleGeneDisorder {
 	
-	private String disorderName = "Tay-Sachs";
+private String disorderName = "Cystic Fibrosis";
 	
 	public static ArrayList<Disorder> getAllTypes() {
 		ArrayList<Disorder> disorders = new ArrayList<Disorder>();
-		disorders.add(new G269S());
-		disorders.add(new IVS12());
-		disorders.add(new IVS9());
+		disorders.add(new G85E());
+		disorders.add(new R117H());
 		return disorders;
 	}
 	
 	public String getDisorderName() {
 		return disorderName;
 	}
-
 }

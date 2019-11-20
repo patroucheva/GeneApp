@@ -15,17 +15,25 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import form.FileUpload;
+import form.TermsForm;
 import model.disorder.Disorder;
+import model.result.Result;
 import service.ParseGenomeService;
 
 @Controller
 public class FileUploadController {
-
-    @RequestMapping(value = "/formUpload", method = RequestMethod.POST)
-	   public ModelAndView student() {
-	      return new ModelAndView("/formUpload", "uploadForm", new FileUpload());
-	   }
 	
+	@RequestMapping(value = "/formUpload", method = RequestMethod.POST)
+	public ModelAndView formUpload() {
+		return new ModelAndView("/formUpload", "uploadForm", new FileUpload());
+	}
+	
+     @RequestMapping(value = "/userAgreement", method = RequestMethod.POST)
+	 public ModelAndView userAgreement(Model model) {
+    	 
+    	return new ModelAndView("/userAgreement", "termsForm", new TermsForm());
+     }
+     
 	 @RequestMapping(value = "/fileUpload", method = RequestMethod.POST)
 	    public ModelAndView parseFiles(
 	            @ModelAttribute("uploadForm") FileUpload forms,
@@ -44,17 +52,34 @@ public class FileUploadController {
 	        ArrayList<Disorder> disorders = Disorder.getDisorders();
 	        Map<String, List<Character>> genome = ParseGenomeService.parseGenome(file1, file2);
 			
-			String results = "";
-	        for(Object disorder: disorders) {
-	        	String result = ((Disorder) disorder).generateResult(genome);
-	        	if (!"".equals(result)) {
-	        		results = results + " " + result;
+			List<Disorder> positiveResults = new ArrayList<Disorder>();
+			List<Disorder> negativeResults = new ArrayList<Disorder>();
+			List<Disorder> unableToCheckFor = new ArrayList<Disorder>();
+			
+	        for(Object object: disorders) {
+	        	Disorder disorder = (Disorder) object;
+	        	disorder.generateResult(genome);
+	        	Result result = disorder.getResult();
+	        	
+	        	if (result.ableToCheck()) {
+	        		
+	        		if(result.isAtRisk()) {
+	        			negativeResults.add(disorder);
+	        		}else {
+	        			positiveResults.add(disorder);
+	        		}
+	        		
+	        	} else {
+	        		
+	        		unableToCheckFor.add(disorder);
+	        		
 	        	}
 			}
-	        if ("".equals(results.trim())) {
-	        	results = "No risk alleles were detected for Hemochromatosis (at genes H63D and C282Y), Sickle Cell Anemia (at gene HBB), and Tay-Sachs (at genes G269S, IVS12, and IVS9).";
-	        }
 			
-			return new ModelAndView("results", "geneticResults", results);
+	        model.addAttribute("negativeResults", negativeResults);
+	        model.addAttribute("positiveResults", positiveResults);
+	        model.addAttribute("unableToCheckFor", unableToCheckFor);
+	        
+			return new ModelAndView("results");
 	    }
 }

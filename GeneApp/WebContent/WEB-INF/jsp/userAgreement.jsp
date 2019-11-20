@@ -1,41 +1,11 @@
-<!--<html>
-<head>
-<title>Spring MVC Tutorial Series by Crunchify.com</title>
-<style type="text/css">
-body {
-	background-image: url('https://cdn.crunchify.com/bg.png');
-}
-</style>
-</head>
-<body>
-	<br>
-	<div style="text-align: center">
-		<h2>
-			Hey You..!! This is your 1st Spring MCV Tutorial..<br> <br>
-		</h2>
-		<h3>
-			<a href="fileUpload.html">Click here to See Welcome Message... </a>(to
-			check Spring MVC Controller... @RequestMapping("/fileUpload"))
-		</h3>
-	</div>
-</body>
-</html> -->
 <!DOCTYPE HTML>
-<!--
-	Greatness by FreeHTML5.co
-	Twitter: http://twitter.com/fh5co
-	URL: http://FreeHTML5.co
--->
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <html>
 	<head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Geneious &mdash; Heritability DNA Analysis</title>
+	<title>Geneious &mdash; Heritability DNA Analysis </title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="Free HTML5 Website Template by FreeHTML5.co" />
-	<meta name="keywords" content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
-	<meta name="author" content="FreeHTML5.co" />
 
 
 	<link href='https://fonts.googleapis.com/css?family=Raleway:400,300,600,400italic,700' rel='stylesheet' type='text/css'>
@@ -88,19 +58,29 @@ body {
 		</div>
 	</nav>
 
-	<header id="gtco-header" class="gtco-cover" role="banner" style="background-image:url(resources/images/dna.jpg);">
+	<header id="gtco-header" class="gtco-cover" role="banner" style="background-image:url(resources/images/header.jpg);">
 		<div class="overlay"></div>
 		<div class="gtco-container">
 			<div class="row">
 				<div class="col-md-12 col-md-offset-0 text-center">
 					<div class="display-t">
 						<div class="display-tc animate-box" data-animate-effect="fadeIn">
-							<h1>Geneious</h1>
-							<h2>Heritability DNA Analysis</h2>
-							<p>
-							<form:form action="userAgreement.html">
-  								<button type="submit" class="btn btn-primary">Get Started</button>
-							</form:form>
+							<h1>Terms and Conditions</h1>
+							<div style="background-color:white;padding:20px;">
+								<form:form action="formUpload.html" modelAttribute="termsForm">
+								<div align="left" style="margin-bottom: 20px">
+									<form:checkbox path="termA" value="I understand the report is for research and educational purposes only."/> I understand the report is for research and educational purposes only.<br><br>
+									<form:checkbox path="termB" value="I understand the report only checks for a limited number of conditions. And that we are not responsible for any birth outcomes outside of and including these conditions."/> I understand the report only checks for a limited number of conditions. And that we are not responsible for any birth outcomes outside of and including these conditions.<br><br>
+									<form:checkbox path="termC" value="I understand that prior to making any reproductive/health decisions I must first confirm the test results by an independent clinically validated test through my doctor."/> I understand that prior to making any reproductive/health decisions I must first confirm the test results by an independent clinically validated test through my doctor.<br><br>
+									<form:checkbox path="termD" value="I accept the risk of learning that I could be a carrier for a serious disease."/> I accept the risk of learning that I could be a carrier for a serious disease.<br><br>
+									<form:checkbox path="termE" value="I acknowledge that this is not a form of medical diagnosis, but merely a method of interpretation of DNA test kits which determine its accuracy."/> I acknowledge that this is not a form of medical diagnosis, but merely a method of interpretation of DNA test kits which determine its accuracy.<br>
+								</div>
+								<div align="center">
+									<form:button type="submit" class="btn btn-primary" id="agree">I agree</form:button>
+									<form:button type="button" class="btn btn-danger" id="disagree">I do not agree</form:button>
+								</div>
+								</form:form>
+							</div>
 						</div>
 					</div>
 				</div>
