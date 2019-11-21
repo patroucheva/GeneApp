@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 	<head>
 	<meta charset="utf-8">
@@ -68,17 +69,22 @@
 							<h1>Terms and Conditions</h1>
 							<div style="background-color:white;padding:20px;">
 								<form:form action="formUpload.html" modelAttribute="termsForm">
-								<div align="left" style="margin-bottom: 20px">
-									<form:checkbox path="termA" value="I understand the report is for research and educational purposes only."/> I understand the report is for research and educational purposes only.<br><br>
-									<form:checkbox path="termB" value="I understand the report only checks for a limited number of conditions. And that we are not responsible for any birth outcomes outside of and including these conditions."/> I understand the report only checks for a limited number of conditions. And that we are not responsible for any birth outcomes outside of and including these conditions.<br><br>
-									<form:checkbox path="termC" value="I understand that prior to making any reproductive/health decisions I must first confirm the test results by an independent clinically validated test through my doctor."/> I understand that prior to making any reproductive/health decisions I must first confirm the test results by an independent clinically validated test through my doctor.<br><br>
-									<form:checkbox path="termD" value="I accept the risk of learning that I could be a carrier for a serious disease."/> I accept the risk of learning that I could be a carrier for a serious disease.<br><br>
-									<form:checkbox path="termE" value="I acknowledge that this is not a form of medical diagnosis, but merely a method of interpretation of DNA test kits which determine its accuracy."/> I acknowledge that this is not a form of medical diagnosis, but merely a method of interpretation of DNA test kits which determine its accuracy.<br>
-								</div>
-								<div align="center">
-									<form:button type="submit" class="btn btn-primary" id="agree">I agree</form:button>
-									<form:button type="button" class="btn btn-danger" id="disagree">I do not agree</form:button>
-								</div>
+									<div align="left" style="margin-bottom: 20px">
+										<c:forEach var="error" items="${termsForm.errors}">
+											<div class="alert alert-danger">
+		  										<strong>&#9888;</strong> ${error}
+											</div>
+										</c:forEach>
+										<form:checkbox path="termA" value="I understand the report is for research and educational purposes only."/> I understand the report is for research and educational purposes only.<br><br>
+										<form:checkbox path="termB" value="I understand the report only checks for a limited number of conditions. And that we are not responsible for any birth outcomes outside of and including these conditions."/> I understand the report only checks for a limited number of conditions. And that we are not responsible for any birth outcomes outside of and including these conditions.<br><br>
+										<form:checkbox path="termC" value="I understand that prior to making any reproductive/health decisions I must first confirm the test results by an independent clinically validated test through my doctor."/> I understand that prior to making any reproductive/health decisions I must first confirm the test results by an independent clinically validated test through my doctor.<br><br>
+										<form:checkbox path="termD" value="I accept the risk of learning that I could be a carrier for a serious disease."/> I accept the risk of learning that I could be a carrier for a serious disease.<br><br>
+										<form:checkbox path="termE" value="I acknowledge that this is not a form of medical diagnosis, but merely a method of interpretation of DNA test kits which determine its accuracy."/> I acknowledge that this is not a form of medical diagnosis, but merely a method of interpretation of DNA test kits which determine its accuracy.<br>
+									</div>
+									<div align="center">
+										<form:button type="submit" class="btn btn-primary" id="agree">I agree</form:button>
+										<form:button type="button" class="btn btn-danger" id="disagree">I do not agree</form:button>
+									</div>
 								</form:form>
 							</div>
 						</div>

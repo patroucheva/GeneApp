@@ -66,18 +66,20 @@
 					<div class="display-t">
 						<div class="display-tc animate-box" data-animate-effect="fadeIn">
 							<h2>Upload Parent Files</h2>
-							<form:form action="fileUpload.html" modelAttribute="uploadForm" enctype="multipart/form-data">
-  								<div class="form-group">
-    								<label for="file1">Father's DNA</label>
-   									<form:input path="file1" type="file" class="form-control" id="file1" placeholder="Enter Father's DNA"></form:input>
-  								</div>
- 								<div class="form-group">
-    								<label for="file2">Mother's DNA</label>
-    								<form:input path="file2" type="file" class="form-control" id="file2" placeholder="Mother's DNA"></form:input>
-    								<!--<small id="dnaHelp" class="form-text text-muted">We'll never share your DNA with anyone else. </small>-->
- 								</div>
-  								<button type="submit" class="btn btn-primary">Submit</button>
-							</form:form>
+							<div style="background-color:white;padding:20px;">
+								<form:form action="fileUpload.html" modelAttribute="uploadForm" enctype="multipart/form-data">
+	  								<div class="form-group">
+	    								<label for="file1">Father's DNA</label>
+	   									<form:input path="file1" type="file" class="form-control" id="file1" placeholder="Enter Father's DNA"></form:input>
+	  								</div>
+	 								<div class="form-group">
+	    								<label for="file2">Mother's DNA</label>
+	    								<form:input path="file2" type="file" class="form-control" id="file2" placeholder="Mother's DNA"></form:input>
+	    								<!--<small id="dnaHelp" class="form-text text-muted">We'll never share your DNA with anyone else. </small>-->
+	 								</div>
+	  								<button type="submit" class="btn btn-primary">Submit</button>
+								</form:form>
+							</div>
 						</div>
 					</div>
 				</div>

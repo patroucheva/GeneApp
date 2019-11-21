@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.File;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,8 +25,16 @@ import service.ParseGenomeService;
 public class FileUploadController {
 	
 	@RequestMapping(value = "/formUpload", method = RequestMethod.POST)
-	public ModelAndView formUpload() {
-		return new ModelAndView("/formUpload", "uploadForm", new FileUpload());
+	public ModelAndView formUpload(Model model, @ModelAttribute("termsForm") TermsForm form) {
+		
+		form.validate();
+		if (form.isValid()) {
+			return new ModelAndView("/formUpload", "uploadForm", new FileUpload());
+		} 
+		
+		
+		return new ModelAndView("/userAgreement", "termsForm", form);
+		
 	}
 	
      @RequestMapping(value = "/userAgreement", method = RequestMethod.POST)
