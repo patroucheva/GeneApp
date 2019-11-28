@@ -1,6 +1,6 @@
 package controller;
 
-import java.io.File;
+import java.io.File; 
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -51,44 +51,55 @@ public class FileUploadController {
 	 
 	        MultipartFile multipartFile1 = forms.getFile1();
        	 	MultipartFile multipartFile2 = forms.getFile2();
+       	 	
+       	 	String fileName1 = multipartFile1.getOriginalFilename();
+       	 	String fileName2 = multipartFile2.getOriginalFilename();
+       	 	
+       	 	int riskCount = 0;
+       	 	int commonCount = 0;
+       	 	int uncheckedCount = 0;
+       	 	
+       	 	if (!fileName1.equals(fileName2)) {
+       	 		
+	       	 	File file1 = new File(saveDirectory + multipartFile1.getOriginalFilename());
+	    	 	File file2 = new File(saveDirectory + multipartFile2.getOriginalFilename());
+	       	 
+	    	 	multipartFile1.transferTo(file1);
+	            multipartFile2.transferTo(file2);
+		        
+		        ArrayList<Disorder> disorders = Disorder.getDisorders();
+		        Map<String, List<Character>> genome = ParseGenomeService.parseGenome(file1, file2);
+				
+				List<Disorder> results = new ArrayList<Disorder>();
+
+		        for(Object object: disorders) {
+		        	Disorder disorder = (Disorder) object;
+		        	disorder.generateResult(genome);
+		        	Result result = disorder.getResult();
+		        	
+		        	if(result.isAbleToCheck()) {
+		        		if(result.isAtRisk()) {
+			        		riskCount++;
+		        		} else {
+		        			commonCount++;
+		        		}
+		        	}
+		        	
+		        	results.add(disorder);
+				}
+				
+		        model.addAttribute("riskCount", riskCount);
+		        model.addAttribute("uncheckedCount", uncheckedCount);		        model.addAttribute("commonCount", commonCount);
+		        model.addAttribute("results", results);
+
+				return new ModelAndView("results");
+       	 	
+       	 	} else {
+       	 		
+       	 		FileUpload fileUpload = new FileUpload();
+       	 		fileUpload.addError("Oops! You appear to have uploaded the same file twice! Make sure to provide files for both parents to receive accurate results.");
+       	 		return new ModelAndView("/formUpload", "uploadForm", fileUpload);
+       	 	}
 	        
-	        File file1 = new File(saveDirectory + multipartFile1.getOriginalFilename());
-    	 	File file2 = new File(saveDirectory + multipartFile2.getOriginalFilename());
-       	 
-    	 	multipartFile1.transferTo(file1);
-            multipartFile2.transferTo(file2);
-	        
-	        ArrayList<Disorder> disorders = Disorder.getDisorders();
-	        Map<String, List<Character>> genome = ParseGenomeService.parseGenome(file1, file2);
-			
-			List<Disorder> positiveResults = new ArrayList<Disorder>();
-			List<Disorder> negativeResults = new ArrayList<Disorder>();
-			List<Disorder> unableToCheckFor = new ArrayList<Disorder>();
-			
-	        for(Object object: disorders) {
-	        	Disorder disorder = (Disorder) object;
-	        	disorder.generateResult(genome);
-	        	Result result = disorder.getResult();
-	        	
-	        	if (result.ableToCheck()) {
-	        		
-	        		if(result.isAtRisk()) {
-	        			negativeResults.add(disorder);
-	        		}else {
-	        			positiveResults.add(disorder);
-	        		}
-	        		
-	        	} else {
-	        		
-	        		unableToCheckFor.add(disorder);
-	        		
-	        	}
-			}
-			
-	        model.addAttribute("negativeResults", negativeResults);
-	        model.addAttribute("positiveResults", positiveResults);
-	        model.addAttribute("unableToCheckFor", unableToCheckFor);
-	        
-			return new ModelAndView("results");
 	    }
 }

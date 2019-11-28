@@ -59,7 +59,7 @@
 		</div>
 	</nav>
 
-	<header id="gtco-header" class="gtco-cover" role="banner" style="background-image:url(resources/images/header.jpg);">
+	<header id="gtco-header" class="gtco-cover" role="banner" style="background-image:url(resources/images/dna.jpg);">
 		<div class="overlay"></div>
 		<div class="gtco-container">
 			<div class="row">
@@ -67,7 +67,7 @@
 					<div class="display-t">
 						<div class="display-tc animate-box" data-animate-effect="fadeIn">
 							<h1>Terms and Conditions</h1>
-							<div style="background-color:white;padding:20px;">
+							<div class="well">
 								<form:form action="formUpload.html" modelAttribute="termsForm">
 									<div align="left" style="margin-bottom: 20px">
 										<c:forEach var="error" items="${termsForm.errors}">
@@ -75,11 +75,15 @@
 		  										<strong>&#9888;</strong> ${error}
 											</div>
 										</c:forEach>
-										<form:checkbox path="termA" value="I understand the report is for research and educational purposes only."/> I understand the report is for research and educational purposes only.<br><br>
-										<form:checkbox path="termB" value="I understand the report only checks for a limited number of conditions. And that we are not responsible for any birth outcomes outside of and including these conditions."/> I understand the report only checks for a limited number of conditions. And that we are not responsible for any birth outcomes outside of and including these conditions.<br><br>
-										<form:checkbox path="termC" value="I understand that prior to making any reproductive/health decisions I must first confirm the test results by an independent clinically validated test through my doctor."/> I understand that prior to making any reproductive/health decisions I must first confirm the test results by an independent clinically validated test through my doctor.<br><br>
-										<form:checkbox path="termD" value="I accept the risk of learning that I could be a carrier for a serious disease."/> I accept the risk of learning that I could be a carrier for a serious disease.<br><br>
-										<form:checkbox path="termE" value="I acknowledge that this is not a form of medical diagnosis, but merely a method of interpretation of DNA test kits which determine its accuracy."/> I acknowledge that this is not a form of medical diagnosis, but merely a method of interpretation of DNA test kits which determine its accuracy.<br>
+										<ul>
+											<li>I understand the report is for research and educational purposes only.</li>
+											<li>I understand the report only checks for a limited number of conditions. And that we are not responsible for any birth outcomes outside of and including these conditions.</li>
+											<li>I understand that prior to making any reproductive/health decisions I must first confirm the test results by an independent clinically validated test through my doctor.</li>
+											<li>I accept the risk of learning that I could be a carrier for a serious disease.</li>
+											<li>I acknowledge that this is not a form of medical diagnosis, but merely a method of interpretation of DNA test kits which determine its accuracy.</li>
+										</ul>
+										<form:checkbox path="allTerms" value="I have read and acknowledge the above terms."/> I have read and acknowledge the above terms.<br>
+										<form:checkbox path="termsAndConditions" value="I have read and acknowledge the full "/> I have read and agree to the full <a href="url">Terms and Conditions</a>.<br>
 									</div>
 									<div align="center">
 										<form:button type="submit" class="btn btn-primary" id="agree">I agree</form:button>

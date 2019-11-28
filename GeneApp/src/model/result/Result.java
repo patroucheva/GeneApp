@@ -16,7 +16,7 @@ public abstract class Result {
 		this.atRisk = atRisk;
 	}
 	
-	public boolean ableToCheck() {
+	public boolean isAbleToCheck() {
 		return ableToCheck;
 	}
 

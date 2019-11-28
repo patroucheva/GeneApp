@@ -5,61 +5,18 @@ import java.util.List;
 
 public class TermsForm {
 	
-	private boolean termA;
-	private boolean termB;
-	private boolean termC;
-	private boolean termD;
-	private boolean termE;
+	private boolean allTerms;
+	private boolean termsAndConditions;
 	private List<String> errors = new ArrayList<String>();
 	private boolean valid = true;
 
-	public boolean isTermA() {
-		return termA;
-	}
-
-	public void setTermA(boolean termA) {
-		this.termA = termA;
-	}
-
-	public boolean isTermB() {
-		return termB;
-	}
-
-	public void setTermB(boolean termB) {
-		this.termB = termB;
-	}
-
-	public boolean isTermC() {
-		return termC;
-	}
-
-	public void setTermC(boolean termC) {
-		this.termC = termC;
-	}
-
-	public boolean isTermD() {
-		return termD;
-	}
-
-	public void setTermD(boolean termD) {
-		this.termD = termD;
-	}
-
-	public boolean isTermE() {
-		return termE;
-	}
-
-	public void setTermE(boolean termE) {
-		this.termE = termE;
-	}
-	
 	public void validate() {
-		if (termA == true && termB == true && termC == true && termD == true && termE == true) {
+		if (allTerms == true && termsAndConditions == true) {
 			valid = true;
 			errors = new ArrayList<String>();
 		} else {
 			valid = false;
-			errors.add("You must check all terms to agree.");
+			errors.add("You must check all terms to proceed.");
 		}
 	}
 
@@ -81,6 +38,22 @@ public class TermsForm {
 
 	public void setValid(boolean valid) {
 		this.valid = valid;
+	}
+
+	public boolean isAllTerms() {
+		return allTerms;
+	}
+
+	public void setAllTerms(boolean allTerms) {
+		this.allTerms = allTerms;
+	}
+
+	public boolean isTermsAndConditions() {
+		return termsAndConditions;
+	}
+
+	public void setTermsAndConditions(boolean termsAndConditions) {
+		this.termsAndConditions = termsAndConditions;
 	}
 	
 }
