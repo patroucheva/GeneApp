@@ -11,29 +11,8 @@
 
 	<link href='https://fonts.googleapis.com/css?family=Raleway:400,300,600,400italic,700' rel='stylesheet' type='text/css'>
 	
-	<!-- Animate.css -->
-	<link rel="stylesheet" href="resources/css/animate.css">
-	<!-- Icomoon Icon Fonts-->
-	<link rel="stylesheet" href="resources/css/icomoon.css">
-	<!-- Bootstrap  -->
 	<link rel="stylesheet" href="resources/css/bootstrap.css">
-
-	<!-- Magnific Popup -->
-	<link rel="stylesheet" href="resources/css/magnific-popup.css">
-
-	<!-- Owl Carousel  -->
-	<link rel="stylesheet" href="resources/css/owl.carousel.min.css">
-	<link rel="stylesheet" href="resources/css/owl.theme.default.min.css">
-
-	<!-- Theme style  -->
 	<link rel="stylesheet" href="resources/css/style.css">
-
-	<!-- Modernizr JS -->
-	<script src="resources/js/modernizr-2.6.2.min.js"></script>
-	<!-- FOR IE9 below -->
-	<!--[if lt IE 9]>
-	<script src="js/respond.min.js"></script>
-	<![endif]-->
 	
 	<style>
 		
@@ -207,22 +186,8 @@
 		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
 	</div>
 	
-	<!-- jQuery -->
 	<script src="resources/js/jquery.min.js"></script>
-	<!-- jQuery Easing -->
-	<script src="resources/js/jquery.easing.1.3.js"></script>
-	<!-- Bootstrap -->
 	<script src="resources/js/bootstrap.min.js"></script>
-	<!-- Waypoints -->
-	<script src="resources/js/jquery.waypoints.min.js"></script>
-	<!-- Carousel -->
-	<script src="resources/js/owl.carousel.min.js"></script>
-	<!-- countTo -->
-	<script src="resources/js/jquery.countTo.js"></script>
-	<!-- Magnific Popup -->
-	<script src="resources/js/jquery.magnific-popup.min.js"></script>
-	<script src="resources/js/magnific-popup-options.js"></script>
-	<!-- Main -->
 	<script src="resources/js/main.js"></script>
 
 	</body>
