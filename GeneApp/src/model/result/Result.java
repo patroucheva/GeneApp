@@ -2,6 +2,10 @@ package model.result;
 
 import java.util.List;
 
+/* Abstract parent class for the results
+* of analyzing a single disorder. Stores whether
+* the child is at risk of inheritence.
+*/
 public abstract class Result {
 	
 	private boolean atRisk;
