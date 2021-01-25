@@ -4,7 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
- 
+
+/**
+* Class used to instantiate FileUpload object
+* for submitting both AncestryDNA files.
+*/
 public class FileUpload {
  
     private MultipartFile file1;
