@@ -21,9 +21,11 @@ import model.disorder.Disorder;
 import model.result.Result;
 import service.ParseGenomeService;
 
+/** SpringMVC Controller class. */
 @Controller
 public class FileUploadController {
 	
+	/** This method is used to inject the model for uploading AncestryDNA text data */
 	@RequestMapping(value = "/formUpload", method = RequestMethod.POST)
 	public ModelAndView formUpload(Model model, @ModelAttribute("termsForm") TermsForm form) {
 		
@@ -37,17 +39,23 @@ public class FileUploadController {
 		
 	}
 	
-     @RequestMapping(value = "/userAgreement", method = RequestMethod.POST)
-	 public ModelAndView userAgreement(Model model) {
+	/** This method is used to inject the model for the user agreement */
+	@RequestMapping(value = "/userAgreement", method = RequestMethod.POST)
+	public ModelAndView userAgreement(Model model) {
     	 
-    	return new ModelAndView("/userAgreement", "termsForm", new TermsForm());
-     }
-     
-	 @RequestMapping(value = "/fileUpload", method = RequestMethod.POST)
-	    public ModelAndView parseFiles(
-	            @ModelAttribute("uploadForm") FileUpload forms,
-	            Model model) throws IllegalStateException, IOException {
-	        String saveDirectory = "/Users/dashapatroucheva/Desktop/DNA";
+		return new ModelAndView("/userAgreement", "termsForm", new TermsForm());
+		
+	}
+     	
+	/** 
+	*   This method is triggered upon submission of AncestryDNA text data. It calls the
+	*   appropriate methods for parsing the genoome, checking for disorders, and injects
+	*   the view for the results.
+	*/
+	@RequestMapping(value = "/fileUpload", method = RequestMethod.POST)
+	public ModelAndView parseFiles(@ModelAttribute("uploadForm") FileUpload forms, Model model) throws IllegalStateException, IOException {
+	        
+		String saveDirectory = "/Users/dashapatroucheva/Desktop/DNA";
 	 
 	        MultipartFile multipartFile1 = forms.getFile1();
        	 	MultipartFile multipartFile2 = forms.getFile2();
@@ -65,13 +73,16 @@ public class FileUploadController {
 	    	 	File file2 = new File(saveDirectory + multipartFile2.getOriginalFilename());
 	       	 
 	    	 	multipartFile1.transferTo(file1);
-	            multipartFile2.transferTo(file2);
+	            	multipartFile2.transferTo(file2);
 		        
+			//Get up to date list of current disorders being checked for
 		        ArrayList<Disorder> disorders = Disorder.getDisorders();
+			//Parse the genomes to a HashMap
 		        Map<String, List<Character>> genome = ParseGenomeService.parseGenome(file1, file2);
 				
-				List<Disorder> results = new ArrayList<Disorder>();
-
+			List<Disorder> results = new ArrayList<Disorder>();
+			
+			//For each disorder, check for the presence of risk alleles within the genomes and add to results
 		        for(Object object: disorders) {
 		        	Disorder disorder = (Disorder) object;
 		        	disorder.generateResult(genome);
@@ -87,12 +98,14 @@ public class FileUploadController {
 		        	
 		        	results.add(disorder);
 				}
-				
+			
+			//Add results and number of risk/common/unchecked alleles to model
 		        model.addAttribute("riskCount", riskCount);
-		        model.addAttribute("uncheckedCount", uncheckedCount);		        model.addAttribute("commonCount", commonCount);
+		        model.addAttribute("uncheckedCount", uncheckedCount);		        
+			model.addAttribute("commonCount", commonCount);
 		        model.addAttribute("results", results);
 
-				return new ModelAndView("results");
+			return new ModelAndView("results");
        	 	
        	 	} else {
        	 		
