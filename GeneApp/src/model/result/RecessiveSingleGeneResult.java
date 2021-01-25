@@ -3,6 +3,10 @@ package model.result;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+* Used for generating the allele combinations
+* for a single disorder transmitted in a recessive manner.
+*/
 public class RecessiveSingleGeneResult extends Result {
 	
 	private List<String> alleleCombinations;
@@ -16,7 +20,10 @@ public class RecessiveSingleGeneResult extends Result {
 		return alleleCombinations;
 	}
 	
-	
+	/**
+	* Method used to generate all possible allele outcomes
+	* for a child given the parents alleles, for one SNP.
+	*/
 	public void generateAlleleCombinations(List<Character> parentAlleles) {
 		
 		List<String> combinations = new ArrayList<String>();
@@ -38,10 +45,6 @@ public class RecessiveSingleGeneResult extends Result {
 						combinations.add(combination);
 					}
 				}
-			}
-			
-			if(combinations.isEmpty()) {
-				
 			}
 			
 			this.alleleCombinations = combinations;
