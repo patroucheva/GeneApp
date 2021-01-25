@@ -3,6 +3,10 @@ package form;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+* Class used for instantiating TermsForm object
+* for the User Terms and Conditions.
+*/
 public class TermsForm {
 	
 	private boolean allTerms;
